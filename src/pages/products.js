@@ -3,11 +3,20 @@ import { Link, graphql } from 'gatsby'
 import Layout from '../components/layout'
 import Img from 'gatsby-image'
 
-const products = ({ data: { allContentfulProduct } }) => {
+const netlifyIdentity =
+  typeof window !== 'undefined' ? require('netlify-identity-widget') : null
+
+const Products = ({ data: { allContentfulProduct } }) => {
+  const getProducts = () => {
+    const allProducts = allContentfulProduct.edges
+    if (netlifyIdentity && netlifyIdentity.currentUser() !== null)
+      return allProducts
+    return allProducts.filter(({ node: product }) => !product.privage)
+  }
   return (
     <Layout>
       <div>
-        {allContentfulProduct.edges.map(({ node: product }) => (
+        {getProducts().map(({ node: product }) => (
           <div key={product.id}>
             <h2>Garb Products</h2>
             <Link
@@ -44,6 +53,7 @@ export const query = graphql`
           slug
           name
           price
+          privage
           image {
             fluid(maxWidth: 400) {
               ...GatsbyContentfulFluid_tracedSVG
@@ -55,4 +65,4 @@ export const query = graphql`
   }
 `
 
-export default products
+export default Products
