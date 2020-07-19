@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, graphql } from 'gatsby'
 import Layout from '../components/layout'
 import Img from 'gatsby-image'
@@ -7,16 +7,26 @@ const netlifyIdentity =
   typeof window !== 'undefined' ? require('netlify-identity-widget') : null
 
 const Products = ({ data: { allContentfulProduct } }) => {
-  const getProducts = () => {
+  const [products, setProducts] = useState([])
+
+  useEffect(() => {
+    getProducts()
+    if (netlifyIdentity) {
+      netlifyIdentity.on('login', user => this.getProducts(user))
+      netlifyIdentity.on('logout', () => this.getProducts())
+    }
+  }, [])
+  const getProducts = user => {
+    console.log('Current user', user)
     const allProducts = allContentfulProduct.edges
     if (netlifyIdentity && netlifyIdentity.currentUser() !== null)
-      return allProducts
-    return allProducts.filter(({ node: product }) => !product.privage)
+      setProducts(allProducts)
+    setProducts(allProducts.filter(({ node: product }) => !product.privage))
   }
   return (
     <Layout>
       <div>
-        {getProducts().map(({ node: product }) => (
+        {products.map(({ node: product }) => (
           <div key={product.id}>
             <h2>Garb Products</h2>
             <Link
