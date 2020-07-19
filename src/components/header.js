@@ -15,6 +15,9 @@ const NavLink = props => <Link getProps={isActive} {...props} />
 
 const Header = ({ siteTitle }) => {
   useEffect(() => {
+    if (typeof window === 'undefined' || !window.netlifyIdentity) {
+      return
+    }
     netlifyIdentity.init()
   }, [])
 
