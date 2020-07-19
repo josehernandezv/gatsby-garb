@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
 import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
-import netlifyIdentity from 'netlify-identity-widget'
-
 import gatsbyLogo from '../images/gatsby-icon.png'
+
+const netlifyIdentity =
+  typeof window !== 'undefined' ? require('netlify-identity-widget') : null
 
 const isActive = ({ isCurrent }) => {
   return {
@@ -15,10 +16,9 @@ const NavLink = props => <Link getProps={isActive} {...props} />
 
 const Header = ({ siteTitle }) => {
   useEffect(() => {
-    if (typeof window === 'undefined' || !window.netlifyIdentity) {
-      return
+    if (netlifyIdentity) {
+      netlifyIdentity.init()
     }
-    netlifyIdentity.init()
   }, [])
 
   return (
