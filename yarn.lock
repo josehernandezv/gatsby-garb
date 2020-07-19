@@ -9422,6 +9422,11 @@ neo-async@^2.5.0, neo-async@^2.6.1:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
   integrity sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
 
+netlify-identity-widget@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/netlify-identity-widget/-/netlify-identity-widget-1.8.0.tgz#a56ad82a7784b16523f023f7d26b41d77ed4b4ea"
+  integrity sha512-evc6OW6WsFectG31raqer/Ge1yZ3aweFja0RI85zvoHvjgiUPM5Je9xEnz1PELPRYW/Kz0ccANzng47RdgECBA==
+
 next-tick@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.1.0.tgz#1836ee30ad56d67ef281b22bd199f709449b35eb"
