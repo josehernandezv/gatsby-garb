@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Link } from 'gatsby'
 import PropTypes from 'prop-types'
-import NetlifyIdentityWidget from 'netlify-identity-widget'
+import netlifyIdentity from 'netlify-identity-widget'
 
 import gatsbyLogo from '../images/gatsby-icon.png'
 
@@ -15,7 +15,7 @@ const NavLink = props => <Link getProps={isActive} {...props} />
 
 const Header = ({ siteTitle }) => {
   useEffect(() => {
-    NetlifyIdentityWidget.init()
+    netlifyIdentity.init()
   }, [])
 
   return (
